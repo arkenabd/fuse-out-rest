@@ -1,12 +1,22 @@
 package com.netty.fuse.util;
 
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.DocumentBuilder;
+
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +25,15 @@ public class FixLengthConf {
 	public List<FixLengthMessageIn> getConf() {
 
 		List<FixLengthMessageIn> flconf = new ArrayList<FixLengthMessageIn>();
+		Resource resource = new ClassPathResource("classpath:FixLengthConfig.xml");
 		try {
 
-			File fXmlFile = new File("src/main/resources/FixLengthConfig.xml");
+//			File fXmlFile = new File("src/main/resources/FixLengthConfig.xml");
+			// File fXmlFile = readXml(resource.getInputStream());
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-
+			// Document doc = dBuilder.parse(fXmlFile);
+			Document doc = readXml(resource.getInputStream());
 			// optional, but recommended
 			// read this -
 			// http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
@@ -57,4 +69,28 @@ public class FixLengthConf {
 		return flconf;
 	}
 
+	public static Document readXml(InputStream is) throws SAXException, IOException, ParserConfigurationException {
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+		dbf.setValidating(false);
+		dbf.setIgnoringComments(false);
+		dbf.setIgnoringElementContentWhitespace(true);
+		dbf.setNamespaceAware(true);
+		// dbf.setCoalescing(true);
+		// dbf.setExpandEntityReferences(true);
+
+		DocumentBuilder db = null;
+		db = dbf.newDocumentBuilder();
+		db.setEntityResolver(new NullResolver());
+
+		// db.setErrorHandler( new MyErrorHandler());
+
+		return db.parse(is);
+	}
+}
+
+class NullResolver implements EntityResolver {
+	public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
+		return new InputSource(new StringReader(""));
+	}
 }
