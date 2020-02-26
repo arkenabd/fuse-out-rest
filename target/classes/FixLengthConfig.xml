@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<flconfig>
+	<field name="unknown1">
+		<start>1</start>
+		<end>21</end>
+	</field>
+	<field name="unknown2">
+		<start>22</start>
+		<end>39</end>
+	</field>
+	<field name="unknown3">
+		<start>40</start>
+		<end>45</end>
+	</field>
+	<field name="ip">
+		<start>46</start>
+		<end>84</end>
+	</field>
+	<field name="unknown4">
+		<start>85</start>
+		<end>160</end>
+	</field>
+	<field name="unknown5">
+		<start>161</start>
+		<end>208</end>
+	</field>
+	<field name="unknown6">
+		<start>209</start>
+		<end>294</end>
+	</field>
+	<field name="unknown7">
+		<start>295</start>
+		<end>348</end>
+	</field>
+	<field name="unknown8">
+		<start>349</start>
+		<end>390</end>
+	</field>
+	<field name="NIK">
+		<start>391</start>
+		<end>410</end>
+	</field>
+	<field name="user_id">
+		<start>412</start>
+		<end>431</end>
+	</field>
+	<field name="password">
+		<start>433</start>
+		<end>452</end>
+	</field>
+
+</flconfig>
