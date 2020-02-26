@@ -36,7 +36,8 @@ public class ServerRoute extends RouteBuilder {
 				.setHeader(Exchange.HTTP_METHOD, constant("POST"))
 				.setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
 				
-				.to("http4://fuse-dum-dukcapil-middleware.apps.hanabank.co.id/dukcapil/reg").unmarshal().json(JsonLibrary.Gson, UserPojoReq.class)
+				.to("http4://fuse-dum-dukcapil-middleware.apps.hanabank.co.id/dukcapil/reg")
+				//.unmarshal().json(JsonLibrary.Gson, UserPojoReq.class)
 //				.to("http4://localhost:7070/dukcapil/reg")
 				.unmarshal().json(JsonLibrary.Gson, UserPojoResp.class)
 				.log("Body IN : (${body})")
