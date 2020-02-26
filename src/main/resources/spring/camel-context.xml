@@ -20,6 +20,7 @@
     <!-- String to ChannelBuffer/ByteBuf -->
     <bean class="org.jboss.netty.handler.codec.string.StringEncoder" id="stringEncoder"/>
     <bean class="com.netty.fuse.util.PojoJson" id="jsonOut" scope="singleton"/>
-    <bean class="com.netty.fuse.ParsingIso" id="parsingIso" scope="singleton"/>
-    <bean class="com.netty.fuse.GenerateFullInfo" id="generateFullInfo" scope="singleton"/>
+    <bean class="com.netty.fuse.ParsingFixLength" id="parsingFixLength" scope="singleton"/>
+    <bean class="com.netty.fuse.GenerateFixLength"
+        id="generateFixLength" scope="singleton"/>
 </beans>
